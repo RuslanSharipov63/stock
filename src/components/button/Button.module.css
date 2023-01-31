@@ -1,0 +1,12 @@
+.btn {
+    max-width: 10vw;
+    font-size: 1.5vw;
+    color: yellow;
+    border: none;
+    background-color: DarkOrange;
+    border-radius: 6px;
+    padding: 5px;
+    cursor: pointer;
+    margin: 8px;
+  
+}

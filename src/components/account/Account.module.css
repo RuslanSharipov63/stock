@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 95vw;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+}
+
+.containerImg {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 70vw;
+    margin: 1vw;
+    overflow: hidden;
+}
+
+.cardImg {
+    display: flex;
+    flex-direction: column;
+    width: 23vw;
+}
+
+.img {
+    display: flex;
+    width: 23vw;
+}
+
+.containerProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20vw;
+    margin: 1vw;
+}

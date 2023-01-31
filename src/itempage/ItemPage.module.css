@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.imgContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    padding: 10px;
+
+}
+
+.imgBig {
+    width: 60vw;
+    height: 60vh;
+    margin: 5px;
+    object-fit: contain;
+}
+
+.imgSmall {
+    width: 30vw;
+    height: 30vh;
+    margin: 5px;
+    object-fit: contain;
+}
+
+.dataContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 40vw;
+    padding: 10px;
+}

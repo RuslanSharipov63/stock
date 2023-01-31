@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 20vw;
+    border: 1px solid blue;
+    padding: 5px;
+    margin: 1vw;
+}
+
+.inpDiv, .inpFileDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin-top: 2px;
+    border: none;
+}
+
+.inpFileDiv {
+    margin-bottom: 1px;
+    margin-top: 2px;
+}
+
+.inp {
+    outline: none;
+}
+
+.hidden {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    line-height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
