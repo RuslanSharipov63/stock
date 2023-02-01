@@ -16,10 +16,15 @@ const Item = (props) => {
                 className={style.cardItem}
                 onClick={() => props.funcRedirect(item.id)}
             >
-                {/* <div className={style.wrapper}> */}
-                    <img src={require('./../../../../back_stock/imgwater/' + item.img_water_big)} alt={item.id} className={style.img} />
+                <div className={style.wrapper}>
+                    <img 
+                    src={require('./../../../../back_stock/img/' + item.img_original_big)} 
+                    alt={item.id} 
+                    className={style.img} 
+                    onContextMenu={(e)=>  {e.preventDefault(); return false;}}
+                    />
                 </div>
-            /* </div> */)}
+            </div>)}
         </div>
     );
 }

@@ -18,7 +18,6 @@ export const fetchAllData = createAsyncThunk(
 
 )
 
-
 export const fetchAddContent = createAsyncThunk(
     '@alldata/fetchAddContent',
     async function (content, { rejectWithValue, dispatch }) {
@@ -33,36 +32,19 @@ export const fetchAddContent = createAsyncThunk(
                 body: formData,
             });
 
-            if (!response.ok) {
-                throw new Error('Can\'t add content. Server error.');
-            }
+            /*  if (!response.ok) {
+                 throw new Error('Can\'t add content. Server error.');
+             } */
 
-            const message = await response.text();
-
-            dispatch(addContent(message));
-            return message;
-
+            const data = await response.text();
+            return JSON.parse(data);
         } catch (error) {
-            return rejectWithValue(error.message);
+            return rejectWithValue('Ошибка');
         }
     }
 
 
 )
-
-export const fetchDeleteImg = createAsyncThunk(
-    '@delete/fetchDeleteImg',
-    async function (id, { rejectWithValue, dispatch }) {
-        try {
-         const response = await fetch(`http://localhost:8000/delete/${id}`)
-            /* const data = await response.text();
-            return JSON.parse(data) */
-            dispatch(deleteImg(id))
-        } catch (error) {
-            console.log(error)
-            return rejectWithValue('Ошибка. Попробуйте еще раз')
-        }
-    })
 
 
 /* const setError = (state, action) => {
@@ -77,14 +59,11 @@ export const allDataSlice = createSlice({
         status: null,
         error: null,
     },
-    reducers: {
+  /*   reducers: {
         addContent(state, action) {
-            state.status = action.payload
+            state.data = action.payload
         },
-        deleteImg: (state, action) => {
-            state.data = state.data.filter(item => item.id != action.payload.id)
-        }
-    },
+    }, */
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllData.pending, (state) => {
@@ -94,28 +73,19 @@ export const allDataSlice = createSlice({
                 state.data = action.payload;
                 state.status = null
             })
-            /*   .addCase(fetchAddContent.fulfilled, (state, action) => {
-                  state.status = action.payload;
-  
-              }) */
-            .addCase(fetchAddContent.rejected, (state, action) => {
-                state.status = action.payload;
-
-            })
-            .addCase(fetchDeleteImg.pending, (state) => {
-                state.loading = 'Загрузка';
+            .addCase(fetchAddContent.fulfilled, (state, action) => {
+                state.data = action.payload;
+                state.status = 'Файл загружен'
                 state.error = null
-            })
-            .addCase(fetchDeleteImg.fulfilled, (state) => {
-                state.loading = null;
-                state.error = null;
-            })
-            .addCase(fetchDeleteImg.rejected, (state) => {
-                state.loading = null;
-                state.error = 'error'
-            })
-        }
-    })
 
-export const { addContent, deleteImg } = allDataSlice.actions;
+            })
+            .addCase(fetchAddContent.rejected, (state, action) => {
+                state.error = 'Произошла ошибка';
+
+            })
+            
+    }
+})
+
+export const { addContent } = allDataSlice.actions;
 export default allDataSlice.reducer;

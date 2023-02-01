@@ -1,46 +1,45 @@
 .container {
-    column-count: 3;
-   /*  column-width: 30vw; */
-    /* display: flex;
+     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    flex-wrap: wrap;  */
-/*     display: grid;
-    place-items: center;
-    grid-gap: 5px;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto;
-    justify-items: center;
-    grid-auto-flow: dense; */
-    /*   width: 90vw;
+    flex-wrap: wrap; 
+    width: 90vw;
     height: auto;
     margin-left: 7vw;
-    margin-right: 3vw;*/
-    margin-left: 2vw;
-    margin-top: 2vh;
-   /*  align-items: start; */
+    margin-right: 3vw;
+    margin-top: 10px;
 
 }
 
 .cardItem {
-    /*   display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end; 
-    align-items: flex-start; */
-    /*  width: 25vw;
+    align-items: flex-start;
+    width: 25vw;
     margin-bottom: 5px;
     margin-right: 10px;
-    max-height: 60vh; */
+    max-height: 60vh;
+    /* border: 5px solid red; */
 }
 
 .img {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end; 
-    align-items: flex-start; */
-    width: 30vw;
+    align-items: flex-start;
+    width: 25vw;
     object-fit: cover;
-    max-height: 90vh;
+    max-height: 60vh;
 
+}
+
+.wrapper {
+   display: flex;
+    flex-direction: column;
+    justify-content: flex-end;  
+    align-items: flex-start;
+    width: 25vw;
+ /*    border: 5px solid black;  */
 }

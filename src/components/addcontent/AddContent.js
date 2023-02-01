@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useParams } from 'react-router-dom'
 import style from './AddContent.module.css';
 import Button from "../button/Button";
 import { fetchAddContent } from "../../store/allDataSlice";
@@ -12,7 +11,7 @@ const AddContent = (props) => {
     const [tags, setTags] = useState('')
     const [newFile, setNewFile] = useState(null)
     const isLodaing = useSelector(state => state.allDataSlice.status)
-    const id = useParams();
+    const isError = useSelector(state => state.allDataSlice.error)
 
     const addFile = (e) => {
         e.preventDefault();
@@ -25,18 +24,18 @@ const AddContent = (props) => {
             return;
         }
         const content = {
-            id: id.id,
+            id: props.id,
             tags: tags,
             img: newFile
         }
-
+        console.log(content)
         dispatch(fetchAddContent(content))
 
     }
 
     const handleFile = (e) => {
         setNewFile(e.target.files[0])
-        console.log(e.target.files)
+
     }
 
     const uploadFile = () => {
@@ -47,6 +46,8 @@ const AddContent = (props) => {
     return (
         <div className={style.container}>
             {isLodaing != null ? <p>{isLodaing}</p> : null}
+            {isError != null ? <p> {isError}</p> : null}
+
             <p>Выберите картинку (png, jpg, gif)</p>
             <Button text={'Загрузить'} universalFunc={uploadFile} />
             {/* <button onClick={uploadFile}>Загрузить</button> */}
@@ -74,14 +75,16 @@ const AddContent = (props) => {
                 universalFunc={addFile}
             />
             {/* <button onClick={(e) => addFile(e)}>Добавить</button> */}
-            {newFile && (
-                <ul>
-                    <li>Название файла: {newFile.name}</li>
-                    <li>Тип: {newFile.type}</li>
-                    <li>Размер: {newFile.size} байт</li>
-                </ul>
-            )}
-        </div>
+            {
+                newFile && (
+                    <ul>
+                        <li>Название файла: {newFile.name}</li>
+                        <li>Тип: {newFile.type}</li>
+                        <li>Размер: {newFile.size} байт</li>
+                    </ul>
+                )
+            }
+        </div >
     );
 }
 

@@ -44,7 +44,7 @@ const Header = () => {
                 </div>
                 <div className={style.containerBtn}>
                     <div className={style.item}>
-                        <a href="/Auth">
+                        <a href="/Auth" onClick={inOut} >
                             <Button
                                 text={buttonMessage}
                                 universalFunc={inOut}
