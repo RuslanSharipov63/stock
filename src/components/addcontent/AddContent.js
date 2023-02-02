@@ -3,18 +3,20 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import style from './AddContent.module.css';
 import Button from "../button/Button";
-import { fetchAddContent } from "../../store/allDataSlice";
+import { fetchAddContent } from "../../store/userImgSlice";
 
 const AddContent = (props) => {
     const dispatch = useDispatch();
     const selectFile = useRef(null);
     const [tags, setTags] = useState('')
     const [newFile, setNewFile] = useState(null)
+    const [preView, setPreView] = useState(null)
     const isLodaing = useSelector(state => state.allDataSlice.status)
     const isError = useSelector(state => state.allDataSlice.error)
 
     const addFile = (e) => {
         e.preventDefault();
+
         if (!newFile) {
             alert('Файл не выбран')
             return;
@@ -28,17 +30,19 @@ const AddContent = (props) => {
             tags: tags,
             img: newFile
         }
-        console.log(content)
         dispatch(fetchAddContent(content))
 
     }
 
     const handleFile = (e) => {
+        e.preventDefault();
         setNewFile(e.target.files[0])
+        setPreView(URL.createObjectURL(e.target.files[0]))
 
     }
 
-    const uploadFile = () => {
+    const uploadFile = (e) => {
+        e.preventDefault();
         selectFile.current.click();
     }
 
@@ -50,7 +54,6 @@ const AddContent = (props) => {
 
             <p>Выберите картинку (png, jpg, gif)</p>
             <Button text={'Загрузить'} universalFunc={uploadFile} />
-            {/* <button onClick={uploadFile}>Загрузить</button> */}
             <div className={style.inpFileDiv}>
                 <input
                     className={style.hidden}
@@ -74,14 +77,15 @@ const AddContent = (props) => {
                 text={'Добавить'}
                 universalFunc={addFile}
             />
-            {/* <button onClick={(e) => addFile(e)}>Добавить</button> */}
             {
                 newFile && (
                     <ul>
                         <li>Название файла: {newFile.name}</li>
                         <li>Тип: {newFile.type}</li>
                         <li>Размер: {newFile.size} байт</li>
+                        <img src={preView} style={{ width: '200px' }} />
                     </ul>
+
                 )
             }
         </div >

@@ -19,6 +19,7 @@ const Account = () => {
     const { loading, isTokenId } = useSelector(state => state.isAuth)
     const userimg = useSelector(state => state.userimg.img)
     const id = useParams();
+    console.log(userimg)
 
     useEffect(() => {
         dispatch(fetchIsToken())
@@ -39,17 +40,16 @@ const Account = () => {
     }
 
     const universalFunc = (item) => {
-        console.log(item.id)
         dispatch(fetchDeleteImg(item.id))
     }
     return (
         <div className={style.container}>
 
             <div className={style.containerImg}>
-                {userimg.length === 0 ? <p>Загрузка...</p> : userimg.map(item => <div key={item.id} className={style.cardImg}>
+                {userimg.length === 0 ? <p>Фотографии отсутствуют</p> : userimg.map(item => <div key={item.id} className={style.cardImg}>
 
                     <img className={style.img}
-                        src={require('./../../../../back_stock/img/' + item.img_original_big)} alt="картинка" />
+                        src={require('./../../../../stock_back/img/' + item.img_original_big)} alt="картинка" />
                     <p>Теги: {item.tags}</p>
                     <Button text={'Удалить'} universalFunc={() => universalFunc(item)} />
                 </div>

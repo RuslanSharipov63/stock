@@ -32,6 +32,37 @@ export const fetchDeleteImg = createAsyncThunk(
         }
     })
 
+
+export const fetchAddContent = createAsyncThunk(
+    '@alldata/fetchAddContent',
+    async function (content, { rejectWithValue, dispatch }) {
+        const formData = new FormData();
+        formData.append('id', content.id)
+        formData.append('file', content.img)
+        formData.append('tags', content.tags)
+        console.log(content.id)
+        try {
+            const response = await fetch('http://localhost:8000/add', {
+                method: 'POST',
+                body: formData,
+            });
+
+            /*  if (!response.ok) {
+                 throw new Error('Can\'t add content. Server error.');
+             } */
+
+            const data = await response.text();
+            dispatch(addContent(JSON.parse(data)))
+            /*  return JSON.parse(data); */
+        } catch (error) {
+            return rejectWithValue('Ошибка');
+        }
+    }
+
+
+)
+
+
 const userImgSlice = createSlice({
     name: '@userimg',
     initialState: {
@@ -40,6 +71,9 @@ const userImgSlice = createSlice({
         error: null
     },
     reducers: {
+        addContent: (state, action) => {
+            state.img = action.payload;
+        },
         deleteContent: (state, action) => {
             state.img = action.payload;
         }
@@ -51,7 +85,7 @@ const userImgSlice = createSlice({
                 state.error = null
             })
             .addCase(fetchUserImg.fulfilled, (state, action) => {
-                state.img = action.payload; 
+                state.img = action.payload;
                 state.loading = null;
                 state.error = null;
             })
@@ -64,7 +98,7 @@ const userImgSlice = createSlice({
                 state.error = null
             })
             .addCase(fetchDeleteImg.fulfilled, (state, action) => {
-                state.img = action.payload;
+                /*  state.img = action.payload; */
                 state.loading = 'Удаление прошло успешно';
                 state.error = null;
             })
@@ -72,7 +106,18 @@ const userImgSlice = createSlice({
                 state.loading = null;
                 state.error = 'Произошла ошибка'
             })
+            .addCase(fetchAddContent.fulfilled, (state, action) => {
+                /* state.img = action.payload; */
+                state.status = 'Файл загружен'
+                state.error = null
+
+            })
+            .addCase(fetchAddContent.rejected, (state) => {
+                state.error = 'Произошла ошибка';
+                state.error = null;
+
+            })
     }
 })
-export const { deleteContent } = userImgSlice.actions;
+export const { deleteContent, addContent } = userImgSlice.actions;
 export default userImgSlice.reducer;

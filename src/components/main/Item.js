@@ -18,7 +18,7 @@ const Item = (props) => {
             >
                 <div className={style.wrapper}>
                     <img 
-                    src={require('./../../../../back_stock/img/' + item.img_original_big)} 
+                    src={require('./../../../../stock_back/img/' + item.img_original_big)} 
                     alt={item.id} 
                     className={style.img} 
                     onContextMenu={(e)=>  {e.preventDefault(); return false;}}
