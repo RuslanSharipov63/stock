@@ -6,18 +6,20 @@ import ItemPage from "./ItemPage";
 
 const ItemPageContainer = () => {
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(fetchAllData())
 
-    }, [])
+    }, [dispatch])
+
     const params = useParams();
     const imgList = useSelector(state => state.allDataSlice)
-    const imgItem = imgList.data.find(item => item.id == params.id)
+   
     
 
     return (
         <div>
-            <ItemPage imgItem={imgItem} />
+            <ItemPage imgList={imgList} params={params}/>
         </div>
     );
 }

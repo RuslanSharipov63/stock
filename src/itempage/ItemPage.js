@@ -1,35 +1,35 @@
+import { useEffect, useState } from 'react';
 import Button from '../components/button/Button';
-import Item from '../components/main/Item';
-
-
 import style from './ItemPage.module.css';
 
+
 const ItemPage = (props) => {
+
+ 
+    const imglist = props.imgList;
+    const imgI = imglist.data.find(item => item.id == props.params.id)
+
+
+    useEffect(() => {
+        
+    }, [props.imgList])
+
+    console.log(imglist)
   
-
-    const imgitem = props.imgItem;
-
     return (
         <div className={style.container}>
             <div className={style.imgContainer}>
                 <div className={style.waterBig}>
                     <img
                         className={style.imgBig}
-                        src={imgitem.img_water_big}
-                        alt={imgitem.author}
-                    />
-                </div>
-                <div className={style.waterSmall}>
-                    <img
-                        className={style.imgSmall}
-                        src={imgitem.img_water_small}
-                        alt={imgitem.title}
+                        src={require('./../../../../timefiles/stock_back/img/' + imgI.img_original_big)}
+                        alt={imgI.author}
                     />
                 </div>
             </div>
             <div className={style.dataContainer}>
-                <p>Автор: Руслан Шарипов</p>
-                <p>Теги: {imgitem.tags}</p>
+                <p>Автор: {imgI.author}</p>
+                <p>Теги: {imgI.tags}</p>
                 <Button text={'Купить'} />
             </div>
         </div>

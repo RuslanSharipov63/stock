@@ -24,7 +24,7 @@ export const fetchDeleteImg = createAsyncThunk(
             const data = await response.text();
             console.log(JSON.parse(data))
             /* return JSON.parse(data) */
-            dispatch(deleteContent(JSON.parse(data)))
+            await dispatch(deleteContent(JSON.parse(data)))
             await fetch(`http://localhost:8000/deletefile`)
         } catch (error) {
             console.log(error)
@@ -40,7 +40,6 @@ export const fetchAddContent = createAsyncThunk(
         formData.append('id', content.id)
         formData.append('file', content.img)
         formData.append('tags', content.tags)
-        console.log(content.id)
         try {
             const response = await fetch('http://localhost:8000/add', {
                 method: 'POST',

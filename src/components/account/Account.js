@@ -19,7 +19,7 @@ const Account = () => {
     const { loading, isTokenId } = useSelector(state => state.isAuth)
     const userimg = useSelector(state => state.userimg.img)
     const id = useParams();
-    console.log(userimg)
+    
 
     useEffect(() => {
         dispatch(fetchIsToken())

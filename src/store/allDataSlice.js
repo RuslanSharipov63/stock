@@ -18,7 +18,19 @@ export const fetchAllData = createAsyncThunk(
 
 )
 
+export const fetchImgForId = createAsyncThunk(
+    '@imgforid',
+    async function (id, { rejectWithValue, dispatch }) {
+        try {
+            const response = await fetch(`http://localhost:8000/${id}`)
+            const data = response.text();
+            dispatch(JSON.parse(filterImgForId(data)));
+        } catch (error) {
+            return rejectWithValue(error)
+        }
 
+    }
+)
 
 /* const setError = (state, action) => {
     state.status = 'rejected';
@@ -32,6 +44,13 @@ export const allDataSlice = createSlice({
         status: null,
         error: null,
     },
+    reducers: {
+        filterImgForId: (state, action) => {
+            state.data = action.payload;
+            state.status = null;
+            state.error = null;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllData.pending, (state) => {
@@ -41,10 +60,10 @@ export const allDataSlice = createSlice({
                 state.data = action.payload;
                 state.status = null
             })
-            
-            
+
+
     }
 })
 
-
+export const { filterImgForId } = allDataSlice.actions;
 export default allDataSlice.reducer;
