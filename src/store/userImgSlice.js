@@ -62,6 +62,21 @@ export const fetchAddContent = createAsyncThunk(
 )
 
 
+export const fetchImgAuthorId = createAsyncThunk(
+    '@imgauthorid/fetchImgAuthorId',
+    async function (id, { rejectWithValue }) {
+        try {
+            const response = await fetch(`http://localhost:8000/authorimg/${id}`)
+            const data = await response.text();
+            return JSON.parse(data)
+        } catch (error) {
+            console.log(error)
+            return rejectWithValue(error)
+        }
+
+    }
+)
+
 const userImgSlice = createSlice({
     name: '@userimg',
     initialState: {
@@ -116,6 +131,20 @@ const userImgSlice = createSlice({
                 state.error = null;
 
             })
+            .addCase(fetchImgAuthorId.pending, (state) => {
+                state.loading = 'Загрузка';
+                state.error = null
+            })
+            .addCase(fetchImgAuthorId.fulfilled, (state, action) => {
+                state.img = action.payload;
+                state.error = null;
+                state.loading = null;
+            })
+            .addCase(fetchImgAuthorId.rejected, (state, action) => {
+                state.loading = null;
+                state.error = action.payload
+            })
+
     }
 })
 export const { deleteContent, addContent } = userImgSlice.actions;

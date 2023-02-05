@@ -1,3 +1,10 @@
+.containerBig {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -39,4 +46,33 @@
     align-items: flex-start;
     width: 40vw;
     padding: 10px;
+}
+
+.containerImgAuthor {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100vw;
+   /*  margin-left: 2.5vw;
+    margin-right: 2.5vw; */
+   
+}
+
+.cardImgAuthor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 31vw;
+    margin: 1vw;
+    height: 60vh;
+    
+}
+
+.imgAuthor {
+    width: 31vw;
+    height: 60vh;
+    object-fit: cover;
 }

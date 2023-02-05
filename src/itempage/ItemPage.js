@@ -2,39 +2,52 @@ import { useEffect, useState } from 'react';
 import Button from '../components/button/Button';
 import style from './ItemPage.module.css';
 
-
 const ItemPage = (props) => {
+    const { status, error, imgOne, author } = props.imgList;
+    const imgla = props.imgLA;
+    useEffect(() => { }, [props.imgList, props.imgLA])
 
- 
-    const imglist = props.imgList;
-    const imgI = imglist.data.find(item => item.id == props.params.id)
-
-
-    useEffect(() => {
-        
-    }, [props.imgList])
-
-    console.log(imglist)
-  
     return (
-        <div className={style.container}>
-            <div className={style.imgContainer}>
-                <div className={style.waterBig}>
-                    <img
-                        className={style.imgBig}
-                        src={require('./../../../../timefiles/stock_back/img/' + imgI.img_original_big)}
-                        alt={imgI.author}
-                    />
+        <div className={style.containerBig}>
+
+            <div className={style.container}>
+                <div className={style.imgContainer}>
+                    {status != null ? status : null}
+                    {error != null ? error :
+                        imgOne.map(item =>
+                            <div className={style.waterBig} key={item.id}>
+                                <img
+                                    className={style.imgBig}
+                                    src={require('./../../../stock_back/img/' + item.img_original_big)}
+                                    alt="фото"
+                                    onContextMenu={(e)=>  {e.preventDefault(); return false;}}
+                                />
+                                <p>Теги: {item.tags}</p>
+                                <p>Другие фотографии автора</p>
+                            </div>
+                        )}
                 </div>
-            </div>
-            <div className={style.dataContainer}>
-                <p>Автор: {imgI.author}</p>
-                <p>Теги: {imgI.tags}</p>
-                <Button text={'Купить'} />
+                {status != null ? status : null}
+                {error != null ? error : null}
+                {author.map(item =>
+                    < div className={style.dataContainer} key={item.name}>
+                        <p>Автор: {item.name}</p>
+                        <Button text={'Купить'} />
+                    </div>
+                )}
+
+            </div >
+            <div className={style.containerImgAuthor}>
+            {imgla.map(item => <div className={style.cardImgAuthor}>
+                <img
+                    className={style.imgAuthor}
+                    src={require('./../../../stock_back/img/' + item.img_original_big)}
+                    alt="фотография"
+                    onContextMenu={(e)=>  {e.preventDefault(); return false;}}
+                />
+            </div>)}
             </div>
         </div>
-
-
     );
 }
 
