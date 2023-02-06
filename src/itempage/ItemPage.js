@@ -13,17 +13,16 @@ const ItemPage = (props) => {
             <div className={style.container}>
                 <div className={style.imgContainer}>
                     {status != null ? status : null}
-                    {error != null ? error :
+                    {imgOne.length === 0 ? <p>Ошибка сервера</p> :
                         imgOne.map(item =>
-                            <div className={style.waterBig} key={item.id}>
+                            <div className={style.cardImg} key={item.id}>
                                 <img
                                     className={style.imgBig}
                                     src={require('./../../../stock_back/img/' + item.img_original_big)}
                                     alt="фото"
-                                    onContextMenu={(e)=>  {e.preventDefault(); return false;}}
+                                    onContextMenu={(e) => { e.preventDefault(); return false; }}
                                 />
                                 <p>Теги: {item.tags}</p>
-                                <p>Другие фотографии автора</p>
                             </div>
                         )}
                 </div>
@@ -37,15 +36,17 @@ const ItemPage = (props) => {
                 )}
 
             </div >
+            <p className={style.text}>Другие фотографии автора</p>
             <div className={style.containerImgAuthor}>
-            {imgla.map(item => <div className={style.cardImgAuthor}>
-                <img
-                    className={style.imgAuthor}
-                    src={require('./../../../stock_back/img/' + item.img_original_big)}
-                    alt="фотография"
-                    onContextMenu={(e)=>  {e.preventDefault(); return false;}}
-                />
-            </div>)}
+
+                {imgla.length === 0 ? <p>Ошибка сервера</p> : imgla.map(item => <div className={style.cardImgAuthor}>
+                    <img
+                        className={style.imgAuthor}
+                        src={require('./../../../stock_back/img/' + item.img_original_big)}
+                        alt="фотография"
+                        onContextMenu={(e) => { e.preventDefault(); return false; }}
+                    />
+                </div>)}
             </div>
         </div>
     );
