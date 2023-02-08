@@ -63,6 +63,11 @@ export const allDataSlice = createSlice({
         author: [],
         imgOne: []
     },
+    reducers: {
+        searchFunc: (state, action) => {
+            return state.data.filter(item => item.tags.toLowerCase().includes(action.payload.toLowerCase()))
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllData.pending, (state) => {
@@ -101,5 +106,5 @@ export const allDataSlice = createSlice({
     }
 })
 
-
+export const { searchFunc } = allDataSlice.actions;
 export default allDataSlice.reducer;

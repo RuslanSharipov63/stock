@@ -1,15 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getImageSize } from 'react-image-size';
+
 import Button from '../components/button/Button';
 import style from './ItemPage.module.css';
 
 const ItemPage = (props) => {
 
-
+    const [size, setSize] = useState({
+        widthImg: 0,
+        heightImg: 0,
+    })
     const { status, error, imgOne, author } = props.imgList;
     const imgla = props.imgLA;
+    let a = JSON.stringify(imgOne);
+    let b = a.split('"');
+    const c = b.find(i => i.includes('.'))
+
+
+    async function main() {
+        const { width, height } = await getImageSize(require('./../../../stock_back/img/' + c));
+        setSize({
+            ...size,
+            widthImg: width,
+            heightImg: height
+        })
+        console.log(width, height)
+    }
 
     useEffect(() => {
-
+        main()
     }, [props.imgList, props.imgLA])
 
 
@@ -19,7 +38,7 @@ const ItemPage = (props) => {
             <div className={style.container}>
                 <div className={style.imgContainer}>
                     {status != null ? status : null}
-                    {imgOne.length === 0 ? <p>Ошибка сервера</p> :
+                    {imgOne.length === 0 ? <p>Загрузка...</p> :
                         imgOne.map(item =>
                             <div className={style.cardImg}
                                 key={item.id}
@@ -30,6 +49,8 @@ const ItemPage = (props) => {
                                     alt="фото"
                                     onContextMenu={(e) => { e.preventDefault(); return false; }}
                                 />
+                                <p>Ширина <span>{size.widthImg}</span> px высота <span>{size.heightImg}</span> px
+                                </p>
                                 <p>Теги: {item.tags}</p>
                             </div>
                         )}
@@ -47,7 +68,7 @@ const ItemPage = (props) => {
             <p className={style.text}>Другие фотографии автора</p>
             <div className={style.containerImgAuthor}>
 
-                {imgla.length === 0 ? <p>Ошибка сервера</p> : imgla.map(item => <div
+                {imgla.length === 0 ? <p>Загрузка...</p> : imgla.map(item => <div
                     className={style.cardImgAuthor}
                     onClick={() => props.funcRedirect(item.id)}
                 >

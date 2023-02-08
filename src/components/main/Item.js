@@ -9,10 +9,11 @@ const Item = (props) => {
     }, [props.imgList])
 
     const imgList = props.imgList;
+    console.log(imgList.data)
 
     return (
         <div className={style.container} >
-            {imgList.data.map(item => <div key={item.id}
+            {imgList.data === undefined ? <p>Ничего не найдено</p> : imgList.data.map(item => <div key={item.id}
                 className={style.cardItem}
                 onClick={() => props.funcRedirect(item.id)}
             >

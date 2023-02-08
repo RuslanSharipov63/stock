@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import style from './Header.module.css';
 import Button from '../button/Button';
 import { toggleLoading } from '../../store/authSlice';
+import { searchFunc } from '../../store/allDataSlice';
 
 
 const Header = () => {
@@ -18,6 +19,12 @@ const Header = () => {
 
     }
 
+    const searchMain = (e) => {
+        let a = e.target.value
+        setSearch(a)
+        console.log(search)
+    }
+
     useEffect(() => {
         chekState(isAuth)
     })
@@ -25,6 +32,14 @@ const Header = () => {
         dispatch(toggleLoading(null));
         localStorage.clear();
     }
+
+    useEffect(() => {
+        if (search != 'Поиск' && search != '') {
+            console.log(search)
+            dispatch(searchFunc(search))
+            return true
+        }
+    }, [search])
 
     return (
         <div>
@@ -38,8 +53,8 @@ const Header = () => {
                         type="search"
                         className={style.search}
                         value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        onFocus={() => setSearch('')}
+                        onChange={searchMain}
+                      /*   onFocus={() => setSearch('')} */
                     />
                 </div>
                 <div className={style.containerBtn}>
