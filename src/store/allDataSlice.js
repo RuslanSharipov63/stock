@@ -20,7 +20,7 @@ export const fetchAllData = createAsyncThunk(
 
 /* запрос для отдельной фотографии */
 export const fetchImgForId = createAsyncThunk(
-    '@imgforid',
+    '@imgforid/fetchImgForId',
     async function (id, { rejectWithValue }) {
         try {
             const response = await fetch(`http://localhost:8000/itempage/${id}`)
@@ -54,7 +54,7 @@ export const fetchAuthorid = createAsyncThunk(
     state.error = action.payload;
 } */
 
-export const allDataSlice = createSlice({
+const allDataSlice = createSlice({
     name: '@alldata',
     initialState: {
         data: [],
@@ -62,6 +62,11 @@ export const allDataSlice = createSlice({
         error: null,
         author: [],
         imgOne: []
+    },
+    redusers: {
+        searchMain: (state, action) => {
+            return state.data.filter(item => item.tags.toLowerCase().includes(action.payload.toLowerCase()));
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -101,5 +106,5 @@ export const allDataSlice = createSlice({
     }
 })
 
-
+export const { searchMain } = allDataSlice.actions;
 export default allDataSlice.reducer;

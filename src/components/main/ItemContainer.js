@@ -7,11 +7,11 @@ import { fetchAllData } from './../../store/allDataSlice';
 const ItemContainer = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch(fetchAllData())
 
-    }, [dispatch])
+    }, [dispatch]) 
 
     const data = useSelector(state => state.allDataSlice);
 
