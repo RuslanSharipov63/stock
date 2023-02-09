@@ -1,18 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getImageSize } from 'react-image-size';
-
-import { useEffect, useState } from 'react';
-import { getImageSize } from 'react-image-size';
-
 import Button from '../components/button/Button';
 import style from './ItemPage.module.css';
 
 const ItemPage = (props) => {
 
-    const [size, setSize] = useState({
-        widthImg: 0,
-        heightImg: 0,
-    })
     const [size, setSize] = useState({
         widthImg: 0,
         heightImg: 0,
@@ -33,10 +25,6 @@ const ItemPage = (props) => {
         })
         console.log(width, height)
     }
-    let a = JSON.stringify(imgOne);
-    let b = a.split('"');
-    const c = b.find(i => i.includes('.'))
-
 
     async function main() {
         const { width, height } = await getImageSize(require('./../../../stock_back/img/' + c));
@@ -50,7 +38,7 @@ const ItemPage = (props) => {
 
     useEffect(() => {
         main()
-        main()
+
     }, [props.imgList, props.imgLA])
 
 
@@ -71,7 +59,6 @@ const ItemPage = (props) => {
                                     alt="фото"
                                     onContextMenu={(e) => { e.preventDefault(); return false; }}
                                 />
-                                <p>Ширина {size.widthImg} px высота {size.heightImg} px</p>
                                 <p>Ширина <span>{size.widthImg}</span> px высота <span>{size.heightImg}</span> px
                                 </p>
                                 <p>Теги: {item.tags}</p>

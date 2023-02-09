@@ -19,12 +19,6 @@ const Header = () => {
 
     }
 
-    const searchMain = (e) => {
-        let a = e.target.value
-        setSearch(a)
-        console.log(search)
-    }
-
     useEffect(() => {
         chekState(isAuth)
     })
@@ -33,14 +27,21 @@ const Header = () => {
         dispatch(toggleLoading(null));
         localStorage.clear();
     }
+    const regSearch = /* /^([a-zа-яё]+|\d+)$/i *//[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]/gu;
 
+    const onKeyDown = (e) => {
+        let result = search.match(regSearch);
+        if (e.key === 'Enter' && result != null) {
+            alert('Enter press');
+        }
+    }
 
-    useEffect(() => {
-         if (search != 'Поиск' && search != '') {
-            dispatch(searchMain(search));
-
-         } 
-    }, [search, dispatch])
+    /*     useEffect(() => {
+            if (search != 'Поиск' && search != '') {
+                dispatch(searchMain(search));
+    
+            }
+        }, [search, dispatch]) */
 
 
     return (
@@ -55,8 +56,9 @@ const Header = () => {
                         type="search"
                         className={style.search}
                         value={search}
-                        onChange={searchMain}
-                      /*   onFocus={() => setSearch('')} */
+                        onChange={(e) => setSearch(e.target.value)}
+                        onFocus={() => setSearch('')}
+                        onKeyDown={onKeyDown}
                     />
                 </div>
                 <div className={style.containerBtn}>
