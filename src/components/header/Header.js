@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import style from './Header.module.css';
 import Button from '../button/Button';
 import { toggleLoading } from '../../store/authSlice';
-import { searchFunc } from '../../store/allDataSlice';
+import { searchMain } from '../../store/allDataSlice';
 
 
 const Header = () => {
@@ -28,18 +28,20 @@ const Header = () => {
     useEffect(() => {
         chekState(isAuth)
     })
+
     const inOut = () => {
         dispatch(toggleLoading(null));
         localStorage.clear();
     }
 
+
     useEffect(() => {
-        if (search != 'Поиск' && search != '') {
-            console.log(search)
-            dispatch(searchFunc(search))
-            return true
-        }
-    }, [search])
+         if (search != 'Поиск' && search != '') {
+            dispatch(searchMain(search));
+
+         } 
+    }, [search, dispatch])
+
 
     return (
         <div>
