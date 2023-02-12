@@ -71,11 +71,12 @@ const allDataSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllData.pending, (state) => {
-                state.status = 'loading'
+                state.status = 'Загрузка...'
             })
             .addCase(fetchAllData.fulfilled, (state, action) => {
                 state.data = action.payload;
                 state.status = null
+                state.error = null
             })
             .addCase(fetchImgForId.pending, (state) => {
                 state.status = 'Загрузка';

@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import style from './Header.module.css';
 import Button from '../button/Button';
 import { toggleLoading } from '../../store/authSlice';
-import { searchMain } from '../../store/allDataSlice';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Header = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isAuth = useSelector(state => state.isAuth.loading)
     const [buttonMessage, setButtonMessage] = useState('Войти');
     const [search, setSearch] = useState('Поиск');
@@ -32,17 +34,10 @@ const Header = () => {
     const onKeyDown = (e) => {
         let result = search.match(regSearch);
         if (e.key === 'Enter' && result != null) {
-            alert('Enter press');
+            navigate(`/searchpage/${search}`)
+            return;
         }
     }
-
-    /*     useEffect(() => {
-            if (search != 'Поиск' && search != '') {
-                dispatch(searchMain(search));
-    
-            }
-        }, [search, dispatch]) */
-
 
     return (
         <div>

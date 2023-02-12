@@ -25,11 +25,13 @@ const AddContent = (props) => {
             alert('Пропишите теги')
             return;
         }
+
         const content = {
             id: props.id,
-            tags: tags,
+            tags: tags.replace(/,/g, " "),
             img: newFile
         }
+        console.log(content)
         dispatch(fetchAddContent(content))
 
     }
