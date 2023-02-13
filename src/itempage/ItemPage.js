@@ -15,17 +15,6 @@ const ItemPage = (props) => {
     let b = a.split('"');
     const c = b.find(i => i.includes('.'))
 
-
-    async function main() {
-        const { width, height } = await getImageSize(require('./../../../stock_back/img/' + c));
-        setSize({
-            ...size,
-            widthImg: width,
-            heightImg: height
-        })
-        console.log(width, height)
-    }
-
     async function main() {
         const { width, height } = await getImageSize(require('./../../../stock_back/img/' + c));
         setSize({
@@ -40,6 +29,10 @@ const ItemPage = (props) => {
         main()
 
     }, [props.imgList, props.imgLA])
+
+    const downloadFunc = () => {
+        
+    }
 
 
     return (
@@ -71,6 +64,7 @@ const ItemPage = (props) => {
                     < div className={style.dataContainer} key={item.name}>
                         <p>Автор: {item.name}</p>
                         <Button text={'Купить'} />
+                        <Button onClick={downloadFunc} text={'Скачать'} />
                     </div>
                 )}
 
