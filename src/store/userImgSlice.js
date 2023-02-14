@@ -45,11 +45,6 @@ export const fetchAddContent = createAsyncThunk(
                 method: 'POST',
                 body: formData,
             });
-
-            /*  if (!response.ok) {
-                 throw new Error('Can\'t add content. Server error.');
-             } */
-
             const data = await response.text();
             dispatch(addContent(JSON.parse(data)))
             /*  return JSON.parse(data); */

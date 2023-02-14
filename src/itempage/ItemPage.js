@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { getImageSize } from 'react-image-size';
 import Button from '../components/button/Button';
 import style from './ItemPage.module.css';
+import { fetchDownload } from '../store/downloadSlice';
 
 const ItemPage = (props) => {
 
@@ -9,7 +11,10 @@ const ItemPage = (props) => {
         widthImg: 0,
         heightImg: 0,
     })
+    const dispatch = useDispatch();
     const { status, error, imgOne, author } = props.imgList;
+    const imageOne = { ...imgOne[0] }
+
     const imgla = props.imgLA;
     let a = JSON.stringify(imgOne);
     let b = a.split('"');
@@ -22,7 +27,7 @@ const ItemPage = (props) => {
             widthImg: width,
             heightImg: height
         })
-        console.log(width, height)
+
     }
 
     useEffect(() => {
@@ -31,7 +36,7 @@ const ItemPage = (props) => {
     }, [props.imgList, props.imgLA])
 
     const downloadFunc = () => {
-        
+        dispatch(fetchDownload(imageOne.img_original_big))
     }
 
 
@@ -42,21 +47,21 @@ const ItemPage = (props) => {
                 <div className={style.imgContainer}>
                     {status != null ? status : null}
                     {imgOne.length === 0 ? <p>Загрузка...</p> :
-                        imgOne.map(item =>
-                            <div className={style.cardImg}
-                                key={item.id}
-                            >
-                                <img
-                                    className={style.imgBig}
-                                    src={require('./../../../stock_back/img/' + item.img_original_big)}
-                                    alt="фото"
-                                    onContextMenu={(e) => { e.preventDefault(); return false; }}
-                                />
-                                <p>Ширина <span>{size.widthImg}</span> px высота <span>{size.heightImg}</span> px
-                                </p>
-                                <p>Теги: {item.tags}</p>
-                            </div>
-                        )}
+
+                        <div className={style.cardImg}
+                            key={imageOne.id}
+                        >
+                            <img
+                                className={style.imgBig}
+                                src={require('./../../../stock_back/img/' + imageOne.img_original_big)}
+                                alt="фото"
+                                onContextMenu={(e) => { e.preventDefault(); return false; }}
+                            />
+                            <p>Ширина <span>{size.widthImg}</span> px высота <span>{size.heightImg}</span> px
+                            </p>
+                            <p>Теги: {imageOne.tags}</p>
+                        </div>
+                    }
                 </div>
                 {status != null ? status : null}
                 {error != null ? error : null}
@@ -64,7 +69,10 @@ const ItemPage = (props) => {
                     < div className={style.dataContainer} key={item.name}>
                         <p>Автор: {item.name}</p>
                         <Button text={'Купить'} />
-                        <Button onClick={downloadFunc} text={'Скачать'} />
+                        <Button
+                            universalFunc={downloadFunc}
+                            text={'Скачать'}
+                        />
                     </div>
                 )}
 
@@ -75,6 +83,7 @@ const ItemPage = (props) => {
                 {imgla.length === 0 ? <p>Загрузка...</p> : imgla.map(item => <div
                     className={style.cardImgAuthor}
                     onClick={() => props.funcRedirect(item.id)}
+                    key={item.id}
                 >
                     <img
                         className={style.imgAuthor}

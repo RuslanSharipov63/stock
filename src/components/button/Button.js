@@ -3,7 +3,8 @@ const Button = (props) => {
 
     return (
         <>
-            <button className={style.btn}
+            <button
+                className={style.btn}
                 onClick={props.universalFunc}
             >
                 {props.text}
