@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { getImageSize } from 'react-image-size';
 import Button from '../components/button/Button';
@@ -35,11 +36,11 @@ const ItemPage = (props) => {
 
     }, [props.imgList, props.imgLA])
 
-    const downloadFunc = () => {
-        dispatch(fetchDownload(imageOne.img_original_big))
-    }
+    /*  const downloadFunc = () => {
+         dispatch(fetchDownload(imageOne.img_original_big))
+     } */
 
-
+    console.log('C:/React_learn/stock_back/img/' + imageOne.img_original_big)
     return (
         <div className={style.containerBig}>
 
@@ -69,10 +70,14 @@ const ItemPage = (props) => {
                     < div className={style.dataContainer} key={item.name}>
                         <p>Автор: {item.name}</p>
                         <Button text={'Купить'} />
-                        <Button
+                        <a
+                            /*   href={`C:/React_learn/stock_back/img/${imageOne.img_original_big}`}  */
+                            href={`./../../../stock_back/img/${imageOne.img_original_big}`}
+                            download target="_blank">Скачать</a>
+                        {/*  <Button
                             universalFunc={downloadFunc}
                             text={'Скачать'}
-                        />
+                        /> */}
                     </div>
                 )}
 
