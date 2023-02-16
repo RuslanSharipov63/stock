@@ -12,6 +12,7 @@ export const fetchDownload = createAsyncThunk(
                 method: 'GET',
                 responseType: 'blob',
             })
+            console.log(response)
             const url = await window.URL.createObjectURL(new Blob([response.data]));
             const link = await document.createElement('a');
             link.href = await url;
