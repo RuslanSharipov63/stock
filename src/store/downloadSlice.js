@@ -4,16 +4,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchDownload = createAsyncThunk(
     '@download/fetchDownload',
     async function (nameImage, { rejectWithValue }) {
-        const formData = new FormData();
-        console.log(nameImage)
-        formData.append('name', nameImage)
+        /*   const formData = new FormData();
+          console.log(nameImage)
+          formData.append('name', nameImage) */
         try {
-            const response = await fetch('http://localhost:8000/download', {
-                method: 'POST',
-                body: formData
+            const response = await fetch(`http://localhost:8000/download/${nameImage}`, {
+                method: 'GET',
+                responseType: 'blob',
             })
-            const data = await response.text();
-            return JSON.parse(data)
+            const url = await window.URL.createObjectURL(new Blob([response.data]));
+            const link = await document.createElement('a');
+            link.href = await url;
+            await link.setAttribute('download', nameImage);
+            await document.body.appendChild(link);
+            await link.click();
+            /* const data = await response.text();
+            return JSON.parse(data) */
         } catch (error) {
             return rejectWithValue(error)
         }
