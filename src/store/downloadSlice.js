@@ -13,12 +13,15 @@ export const fetchDownload = createAsyncThunk(
                 responseType: 'blob',
             })
             console.log(response)
-            const url = await window.URL.createObjectURL(new Blob([response.data]));
+            const data = await response.blob()
+            console.log(data)
+            const url = await URL.createObjectURL(data);
             const link = await document.createElement('a');
             link.href = await url;
             await link.setAttribute('download', nameImage);
             await document.body.appendChild(link);
             await link.click();
+            await link.remove();
             /* const data = await response.text();
             return JSON.parse(data) */
         } catch (error) {
