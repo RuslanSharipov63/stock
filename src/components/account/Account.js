@@ -19,7 +19,7 @@ const Account = () => {
     const { loading, isTokenId } = useSelector(state => state.isAuth)
     const userimg = useSelector(state => state.userimg.img)
     const id = useParams();
-    
+
 
     useEffect(() => {
         dispatch(fetchIsToken())
@@ -51,7 +51,10 @@ const Account = () => {
                     <img className={style.img}
                         src={require('./../../../../stock_back/img/' + item.img_original_big)} alt="картинка" />
                     <p>Теги: {item.tags}</p>
-                    <Button text={'Удалить'} universalFunc={() => universalFunc(item)} />
+                    <Button
+                        text={'Удалить'}
+                        universalFunc={() => universalFunc(item)}
+                    />
                 </div>
                 )}
             </div>

@@ -29,7 +29,8 @@ const AddContent = (props) => {
         const content = {
             id: props.id,
             tags: tags.replace(/,/g, " "),
-            img: newFile
+            img: newFile,
+            size: newFile.size
         }
         console.log(content)
         dispatch(fetchAddContent(content))

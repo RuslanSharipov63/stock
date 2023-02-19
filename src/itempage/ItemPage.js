@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { getImageSize } from 'react-image-size';
 import Button from '../components/button/Button';
@@ -8,15 +7,16 @@ import { fetchDownload } from '../store/downloadSlice';
 
 
 const ItemPage = (props) => {
-
+    const [extensionState, setExtensionState] = useState('')
+    const [sizeMb, setSizeMb] = useState(0);
     const [size, setSize] = useState({
         widthImg: 0,
         heightImg: 0,
     })
+
     const dispatch = useDispatch();
     const { status, error, imgOne, author } = props.imgList;
     const imageOne = { ...imgOne[0] }
-
     const imgla = props.imgLA;
     let a = JSON.stringify(imgOne);
     let b = a.split('"');
@@ -29,7 +29,10 @@ const ItemPage = (props) => {
             widthImg: width,
             heightImg: height
         })
-
+        const arrForExtension = await c.split('.');
+        const extension = await arrForExtension[arrForExtension.length - 1]
+        setExtensionState(extension);
+        setSizeMb(imageOne.size / 1000000);
     }
 
     useEffect(() => {
@@ -37,11 +40,9 @@ const ItemPage = (props) => {
 
     }, [props.imgList, props.imgLA])
 
-      const downloadFunc = () => {
-         dispatch(fetchDownload(imageOne.img_original_big))
-     } 
-
-    console.log('C:/React_learn/stock_back/img/' + imageOne.img_original_big)
+    const downloadFunc = () => {
+        dispatch(fetchDownload(imageOne.img_original_big))
+    }
     return (
         <div className={style.containerBig}>
 
@@ -59,8 +60,7 @@ const ItemPage = (props) => {
                                 alt="фото"
                                 onContextMenu={(e) => { e.preventDefault(); return false; }}
                             />
-                            <p>Ширина <span>{size.widthImg}</span> px высота <span>{size.heightImg}</span> px
-                            </p>
+
                             <p>Теги: {imageOne.tags}</p>
                         </div>
                     }
@@ -69,13 +69,13 @@ const ItemPage = (props) => {
                 {error != null ? error : null}
                 {author.map(item =>
                     < div className={style.dataContainer} key={item.name}>
+                        <p>размер <span>{sizeMb.toFixed(2)}</span> Мб </p>
+                        <p>расширение <span>{extensionState}</span></p>
+                        <p>ширина <span>{size.widthImg}</span> px</p> <p>высота <span>{size.heightImg}</span> px
+                        </p>
                         <p>Автор: {item.name}</p>
                         <Button text={'Купить'} />
-                      {/*   <a
-                            href={`./../image/${imageOne.img_original_big}`}
-                              href={`./../../../../stock_back/img/${imageOne.img_original_big}`} 
-                            download target="_blank">Скачать</a> */}
-                         <Button
+                        <Button
                             universalFunc={downloadFunc}
                             text={'Скачать'}
                         />

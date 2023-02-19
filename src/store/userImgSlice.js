@@ -40,6 +40,7 @@ export const fetchAddContent = createAsyncThunk(
         formData.append('id', content.id)
         formData.append('file', content.img)
         formData.append('tags', content.tags)
+        formData.append('size', content.size)
         try {
             const response = await fetch('http://localhost:8000/add', {
                 method: 'POST',

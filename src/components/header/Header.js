@@ -11,8 +11,8 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isAuth = useSelector(state => state.isAuth.loading)
-    const [buttonMessage, setButtonMessage] = useState('Войти');
-    const [search, setSearch] = useState('Поиск');
+    const [buttonMessage, setButtonMessage] = useState('войти');
+    const [search, setSearch] = useState('поиск');
 
     const chekState = (isAuth) => {
         if (isAuth === 'Пользователь авторизован') {
@@ -42,10 +42,10 @@ const Header = () => {
     return (
         <div>
             <div className={style.container + ' ' + style.title}>
-                <div className={style.item} >Название</div>
-                <div className={style.item}><a href="/">Главная</a></div>
-                <div className={style.item}><a href="">Иллюстрации</a></div>
-                <div className={style.item}><a href="">Видео</a></div>
+                <div className={style.item} >название</div>
+                <div className={style.item}><a href="/">главная</a></div>
+                <div className={style.item}><a href="">иллюстрации</a></div>
+                <div className={style.item}><a href="">видео</a></div>
                 <div className={style.item}>
                     <input
                         type="search"
@@ -53,6 +53,7 @@ const Header = () => {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         onFocus={() => setSearch('')}
+                        onBlur={() => setSearch('поиск')}
                         onKeyDown={onKeyDown}
                     />
                 </div>
@@ -68,7 +69,7 @@ const Header = () => {
                     <div className={style.item}>
                         <a href="/Registration">
                             <Button
-                                text={'Регистрация'}
+                                text={'регистрация'}
                             />
                         </a>
                     </div>
