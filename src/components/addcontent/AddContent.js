@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 import style from './AddContent.module.css';
 import Button from "../button/Button";
 import { fetchAddContent } from "../../store/userImgSlice";
+import { useEffect } from "react";
 
 const AddContent = (props) => {
     const dispatch = useDispatch();
     const selectFile = useRef(null);
     const [tags, setTags] = useState('')
     const [newFile, setNewFile] = useState(null)
+    const [mime, setMime] = useState(null)
     const [preView, setPreView] = useState(null)
     const isLodaing = useSelector(state => state.allDataSlice.status)
     const isError = useSelector(state => state.allDataSlice.error)
@@ -34,7 +36,6 @@ const AddContent = (props) => {
         }
         console.log(content)
         dispatch(fetchAddContent(content))
-
     }
 
     const handleFile = (e) => {
@@ -49,6 +50,19 @@ const AddContent = (props) => {
         selectFile.current.click();
     }
 
+  const strMime = () => {
+        const strMime = newFile.type;
+        const arrMime = strMime.split('/');
+        setMime(arrMime)
+        console.log(mime)
+    } 
+
+    useEffect(() => {
+        if(newFile!=null) {
+            strMime() 
+        }
+         
+    }, [])
 
     return (
         <div className={style.container}>
@@ -63,7 +77,8 @@ const AddContent = (props) => {
                     type="file"
                     ref={selectFile}
                     onChange={(e) => handleFile(e)}
-                    accept="image/*, .png, .jpg, .gif,"
+                    accept=".png, .jpg, .gif, .mp4, .mov., .avi, .mkv,"
+
                 />
             </div>
             <p>Теги</p>
