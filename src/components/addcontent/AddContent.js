@@ -34,7 +34,6 @@ const AddContent = (props) => {
             img: newFile,
             size: newFile.size
         }
-        console.log(content)
         dispatch(fetchAddContent(content))
     }
 
@@ -50,19 +49,20 @@ const AddContent = (props) => {
         selectFile.current.click();
     }
 
-  const strMime = () => {
+
+
+    const strMime = () => {
         const strMime = newFile.type;
         const arrMime = strMime.split('/');
-        setMime(arrMime)
+        setMime(arrMime[0])
         console.log(mime)
-    } 
+    }
 
     useEffect(() => {
-        if(newFile!=null) {
-            strMime() 
+        if (newFile != null) {
+            strMime()
         }
-         
-    }, [])
+    }, [mime])
 
     return (
         <div className={style.container}>
@@ -101,7 +101,10 @@ const AddContent = (props) => {
                         <li>Название файла: {newFile.name}</li>
                         <li>Тип: {newFile.type}</li>
                         <li>Размер: {newFile.size} байт</li>
-                        <img src={preView} style={{ width: '200px' }} />
+                        <li>{mime === 'image' ?
+                            <img src={preView} style={{ width: '200px' }} /> :
+                            <video src={preView} style={{ width: '200px' }}></video> }
+                        </li>
                     </ul>
 
                 )

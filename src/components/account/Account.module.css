@@ -21,7 +21,7 @@
 .cardImg {
     display: flex;
     flex-direction: column;
-    width: 23vw;
+    min-width: 23vw;
     height: 80vh;
     margin: 3px;
 }
