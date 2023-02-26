@@ -4,6 +4,7 @@ import style from './Header.module.css';
 import Button from '../button/Button';
 import { toggleLoading } from '../../store/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -42,10 +43,16 @@ const Header = () => {
     return (
         <div>
             <div className={style.container + ' ' + style.title}>
-                <div className={style.item} >название</div>
-                <div className={style.item}><a href="/">главная</a></div>
-                <div className={style.item}><a href="">иллюстрации</a></div>
-                <div className={style.item}><a href="">видео</a></div>
+                <div className={style.item} >Сток</div>
+                <div className={style.item}>
+                    <NavLink to="/">главная</NavLink>
+                </div>
+                <div className={style.item}>
+                    <NavLink to="/images">иллюстрации</NavLink>
+                </div>
+                <div className={style.item}>
+                    <NavLink to="/videos">видео</NavLink>
+                </div>
                 <div className={style.item}>
                     <input
                         type="search"
@@ -74,9 +81,6 @@ const Header = () => {
                         </a>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     );

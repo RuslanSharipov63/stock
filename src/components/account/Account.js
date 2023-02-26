@@ -9,6 +9,7 @@ import { fetchUserImg } from "../../store/userImgSlice";
 import { fetchDeleteImg } from "../../store/userImgSlice";
 import style from './Account.module.css';
 import Button from "../button/Button";
+import regExtension from "../../regexp/regExtension";
 
 
 const Account = () => {
@@ -47,9 +48,15 @@ const Account = () => {
 
             <div className={style.containerImg}>
                 {userimg.length === 0 ? <p>Фотографии отсутствуют</p> : userimg.map(item => <div key={item.id} className={style.cardImg}>
-
+                    {regExtension.test(item.img_original_big) ? 
                     <img className={style.img}
-                        src={require('./../../../../stock_back/img/' + item.img_original_big)} alt="картинка" />
+                        src={require('./../../../../stock_back/img/' + item.img_original_big)} alt="картинка" /> 
+                        : <video
+                                    src={require('./../../../../stock_back/img/' + item.img_original_big)}
+                                    className={style.img}
+                                    controls="controls"
+                                    onContextMenu={(e) => { e.preventDefault(); return false; }}
+                                ></video>}
                     <p>Теги: {item.tags}</p>
                     <Button
                         text={'Удалить'}

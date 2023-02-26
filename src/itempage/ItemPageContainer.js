@@ -8,6 +8,7 @@ import ItemPage from "./ItemPage";
 
 
 const ItemPageContainer = () => {
+   
     const dispatch = useDispatch();
     const params = useParams();
     let navigate = useNavigate();
@@ -20,12 +21,13 @@ const ItemPageContainer = () => {
 
     }, [dispatch, params])
 
-    
+
     const imgList = useSelector(state => state.allDataSlice)
     const imgListForAuthor = useSelector(state => state.userimg.img)
 
     const funcRedirect = (id) => {
         navigate(`/itempage/${id}`)
+        
     }
 
     return (
@@ -34,6 +36,7 @@ const ItemPageContainer = () => {
                 imgList={imgList}
                 imgLA={imgListForAuthor}
                 funcRedirect={funcRedirect}
+               
             />
         </div>
     );

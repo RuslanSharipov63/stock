@@ -5,7 +5,8 @@ import userSlice from './userSlice';
 import userImgSlice from './userImgSlice';
 import searchSlice from './searchSlice';
 import downloadSlice from './downloadSlice';
-
+import imagesPageSlice from './imagesPageSlice';
+import videosPageSlice from './videosPageSlice';
 export const store = configureStore({
     reducer: {
         allDataSlice: allDataSlice,
@@ -13,6 +14,8 @@ export const store = configureStore({
         user: userSlice,
         userimg: userImgSlice,
         search: searchSlice,
-        download: downloadSlice
+        download: downloadSlice,
+        imagesPage: imagesPageSlice,
+        videosPage: videosPageSlice
     }
 })

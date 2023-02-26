@@ -10,14 +10,15 @@ const Item = (props) => {
 
     const imgList = props.imgList;
 
-
     return (
         <div className={style.container} >
-            {imgList.data.message === false ? <p>Ничего не найдено</p> : imgList.data.map(item => <div key={item.id}
+
+            {imgList.data.map(item => <div
+                key={item.id}
                 className={style.cardItem}
                 onClick={() => props.funcRedirect(item.id)}
             >
-                <div className={style.wrapper}>
+                <div className={style.wrapper} >
                     {regExtension.test(item.img_original_big) ? <img
                         src={require('./../../../../stock_back/img/' + item.img_original_big)}
                         alt={item.id}
@@ -32,6 +33,7 @@ const Item = (props) => {
                 </div>
             </div>)}
         </div>
+
     );
 }
 

@@ -8,6 +8,7 @@ import regExtension from '../regexp/regExtension';
 
 
 const ItemPage = (props) => {
+    const [nameImage, setNameImage] = useState(null)
     const [extensionState, setExtensionState] = useState('')
     const [sizeMb, setSizeMb] = useState(0);
     const [size, setSize] = useState({
@@ -20,14 +21,23 @@ const ItemPage = (props) => {
 
     const imageOne = { ...imgOne[0] }
     const imgla = props.imgLA;
-    let a = JSON.stringify(imgOne);
-    let b = a.split('"');
-    const c = b.find(i => i.includes('.'))
 
+    const nameImageFunc = () => {
+        setNameImage(null)
+        let a = JSON.stringify(imgOne);
+        let b = a.split('"');
+        const c = b.find(i => i.includes('.'))
+        setNameImage(c)
+    }
     async function main() {
-        const arrForExtension = await c.split('.');
-        if (regExtension.test(c)) {
-            const { width, height } = await getImageSize(require('./../../../stock_back/img/' + c));
+      await  setSize({
+            ...size,
+            widthImg: 0,
+            heightImg: 0
+        })
+        const arrForExtension = await nameImage.split('.');
+        if (regExtension.test(nameImage) != false) {
+            const { width, height } = await getImageSize(require('./../../../stock_back/img/' + nameImage));
             setSize({
                 ...size,
                 widthImg: width,
@@ -38,12 +48,16 @@ const ItemPage = (props) => {
         setExtensionState(extension);
         setSizeMb(imageOne.size / 1000000);
     }
+    
 
     useEffect(() => {
-        if (c != undefined) {
-            main();
+        if (imgOne.length != 0) {
+            nameImageFunc()
         }
+        if (nameImage != null || nameImage != undefined) {
+            main();
 
+        }
     }, [props.imgList, props.imgLA])
 
     const downloadFunc = () => {
@@ -51,7 +65,6 @@ const ItemPage = (props) => {
     }
     return (
         <div className={style.containerBig}>
-
             <div className={style.container}>
                 <div className={style.imgContainer}>
                     {status != null ? status : null}
@@ -84,10 +97,10 @@ const ItemPage = (props) => {
                         <p>расширение <span>{extensionState}</span></p>
                         {size.widthImg != 0 ? <div>
                             <p> ширина
-                                <span > {size.widthImg}</span> px
+                                <span > {size.widthImg} </span> px
                             </p>
                             <p>высота
-                                <span>{size.heightImg}</span> px
+                                <span> {size.heightImg} </span> px
                             </p> </div> : null}
                         <p>Автор: {item.name}</p>
                         <Button text={'Купить'} />
@@ -100,10 +113,10 @@ const ItemPage = (props) => {
                 }
 
             </div >
-            <p className={style.text}>Другие фотографии автора</p>
+            <p className={style.text}>Другие работы автора</p>
             <div className={style.containerImgAuthor}>
 
-                {imgla.length === 0 ? <p>Загрузка...</p> : imgla.map(item => <div
+                {imgla.length === 0 ? <p>Ничего не найдено</p> : imgla.map(item => <div
                     className={style.cardImgAuthor}
                     onClick={() => props.funcRedirect(item.id)}
                     key={item.id}

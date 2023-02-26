@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import regExtension from "../regexp/regExtension";
 
 /* запрос всех фотографий для главной страницы */
 export const fetchAllData = createAsyncThunk(
@@ -49,6 +50,8 @@ export const fetchAuthorid = createAsyncThunk(
     }
 )
 
+
+
 /* const setError = (state, action) => {
     state.status = 'rejected';
     state.error = action.payload;
@@ -63,9 +66,12 @@ const allDataSlice = createSlice({
         author: [],
         imgOne: []
     },
-    redusers: {
-        searchMain: (state, action) => {
+    reducers: {
+        searchMain(state, action) {
             return state.data.filter(item => item.tags.toLowerCase().includes(action.payload.toLowerCase()));
+        },
+        imagesPage(state) {
+            return state.data.filter(item => regExtension.test(item.img_original_big));
         },
     },
     extraReducers: (builder) => {
@@ -77,6 +83,10 @@ const allDataSlice = createSlice({
                 state.data = action.payload;
                 state.status = null
                 state.error = null
+            })
+            .addCase(fetchAllData.rejected, (state, action) => {
+                state.status = null
+                state.error = false
             })
             .addCase(fetchImgForId.pending, (state) => {
                 state.status = 'Загрузка';
@@ -107,5 +117,7 @@ const allDataSlice = createSlice({
     }
 })
 
-export const { searchMain } = allDataSlice.actions;
+
+
+export const { searchMain, imagesPage } = allDataSlice.actions;
 export default allDataSlice.reducer;

@@ -80,7 +80,7 @@ export const fetchIsToken = createAsyncThunk(
 
 )
 
-export const isAuthUsersSlice = createSlice({
+const isAuthUsersSlice = createSlice({
     name: '@isAuthUsers',
     initialState: {
         loading: null,

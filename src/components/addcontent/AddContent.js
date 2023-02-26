@@ -27,7 +27,10 @@ const AddContent = (props) => {
             alert('Пропишите теги')
             return;
         }
-
+        if (newFile.size > 1000000000) {
+            alert('Файл не может превышать 1 Гб')
+            return;
+        }
         const content = {
             id: props.id,
             tags: tags.replace(/,/g, " "),
@@ -70,6 +73,7 @@ const AddContent = (props) => {
             {isError != null ? <p> {isError}</p> : null}
 
             <p>Выберите картинку (png, jpg, gif)</p>
+            <p>или видео (mp4, mov, avi, mkv)</p>
             <Button text={'Загрузить'} universalFunc={uploadFile} />
             <div className={style.inpFileDiv}>
                 <input
@@ -77,7 +81,7 @@ const AddContent = (props) => {
                     type="file"
                     ref={selectFile}
                     onChange={(e) => handleFile(e)}
-                    accept=".png, .jpg, .gif, .mp4, .mov., .avi, .mkv,"
+                    accept=".png, .jpg, .gif, .mp4, .mov, .avi, .mkv,"
 
                 />
             </div>
@@ -103,7 +107,7 @@ const AddContent = (props) => {
                         <li>Размер: {newFile.size} байт</li>
                         <li>{mime === 'image' ?
                             <img src={preView} style={{ width: '200px' }} /> :
-                            <video src={preView} style={{ width: '200px' }}></video> }
+                            <video src={preView} style={{ width: '200px' }}></video>}
                         </li>
                     </ul>
 

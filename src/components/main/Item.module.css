@@ -1,16 +1,19 @@
-
 .container {
     columns: 30vw 3;
     column-gap: 1vw;
     column-fill: balance;
     margin-top: 2vh;
     margin-left: 2vw;
-  
+
 }
+
 .img {
     width: 30vw;
-    object-fit: cover;
     max-height: 80vh;
 
 }
 
+.sceleton {
+    width: 30vw;
+    max-height: 80vh;
+}
