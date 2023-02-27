@@ -98,6 +98,8 @@ p {
     height: 60vh;
     margin-top: 3vh;
     object-fit: cover;
+    border: 1px solid black;
+    object-position: center;
 }
 
 span {

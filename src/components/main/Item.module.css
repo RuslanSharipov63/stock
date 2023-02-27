@@ -15,5 +15,6 @@
 
 .sceleton {
     width: 30vw;
-    max-height: 80vh;
+    height: 80vh;
+    border: 1px solid red
 }
