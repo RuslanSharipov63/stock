@@ -4,7 +4,8 @@ const Pagination = (props) => {
 
     const { itemsCount, pageSize } = props;
     const pageCount = Math.ceil(itemsCount / pageSize);
-    console.log(pageCount)
+    const pages = _.range(1, pageCount + 1)
+    console.log(pages)
 
     return (
         <div>
