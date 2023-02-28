@@ -12,10 +12,8 @@ const Item = (props) => {
  
     return (
         <div className={style.container} >
-
             {imgList.data.map(item => <div
                 key={item.id}
-             
                 className={style.cardItem}
                 onClick={() => props.funcRedirect(item.id)}
             >

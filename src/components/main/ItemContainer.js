@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Item from './Item';
 import Pagination from "../pagination/Pagination";
 import { fetchAllData } from './../../store/allDataSlice';
+import { fetchRows } from "../../store/rowsSlice";
 
 const ItemContainer = () => {
     let navigate = useNavigate();
@@ -14,7 +15,12 @@ const ItemContainer = () => {
 
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(fetchRows('all'))
+    }, [dispatch])
+
     const data = useSelector(state => state.allDataSlice);
+    const countRows = useSelector(state => state.rows.size)
     const count = data.data.length;
     const pageSize = 5;
     const itemsCount = Math.ceil(count / pageSize);
@@ -38,6 +44,7 @@ const ItemContainer = () => {
             <Pagination
                 itemsCount={itemsCount}
                 onPageChange={handlePageChange}
+                countRows={countRows}
             />
         </div>
     );

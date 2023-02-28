@@ -7,12 +7,12 @@ const Pagination = (props) => {
 
     }, [props])
 
-    console.log(props.itemsCount)
-
 
     return (
         <div>
+
             <ul className="pagination">
+
                 <li className="pageItem">
                     <a className="pageLink">1</a>
                 </li>
