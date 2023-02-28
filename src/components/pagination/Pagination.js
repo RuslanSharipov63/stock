@@ -1,11 +1,14 @@
 import _ from 'lodash';
+import { useEffect } from 'react';
 
 const Pagination = (props) => {
 
-    const { itemsCount, pageSize } = props;
-    const pageCount = Math.ceil(itemsCount / pageSize);
-    const pages = _.range(1, pageCount + 1)
-    console.log(pages)
+    useEffect(() => {
+
+    }, [props])
+
+    console.log(props.itemsCount)
+
 
     return (
         <div>

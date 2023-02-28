@@ -16,7 +16,8 @@ const ItemContainer = () => {
 
     const data = useSelector(state => state.allDataSlice);
     const count = data.data.length;
-    const pageSize = 4;
+    const pageSize = 5;
+    const itemsCount = Math.ceil(count / pageSize);
 
     const handlePageChange = (pageIndex) => {
         console.log('page ', pageIndex)
@@ -35,8 +36,7 @@ const ItemContainer = () => {
             }}>Loading...</p> :
                 <Item imgList={data} funcRedirect={funcRedirect} />}
             <Pagination
-                itemsCount={count}
-                pageSize={pageSize}
+                itemsCount={itemsCount}
                 onPageChange={handlePageChange}
             />
         </div>
