@@ -57,6 +57,20 @@ export const fetchAuthorid = createAsyncThunk(
     state.error = action.payload;
 } */
 
+const fetchPageData = createAsyncThunk(
+    '@page/fetchPageData',
+    async function (count, { rejectWithValue }) {
+        try {
+            const response = await fetch(`http://localhost:8000/page/${count}`)
+            const data = await response.text();
+            return JSON.parse(data)
+        } catch (error) {
+            rejectWithValue(error)
+        }
+    }
+)
+
+
 const allDataSlice = createSlice({
     name: '@alldata',
     initialState: {
@@ -113,6 +127,19 @@ const allDataSlice = createSlice({
             .addCase(fetchAuthorid.rejected, (state, action) => {
                 state.status = null;
                 state.error = null;
+            })
+            .addCase(fetchPageData.pending, (state, action) => {
+                state.status = 'Загрузка...';
+                state.error = null;
+            })
+            .addCase(fetchPageData.fulfilled, (state, action) => {
+                state.author = action.payload;
+                state.status = null;
+                state.error = null
+            })
+            .addCase(fetchPageData.rejected, (state, action) => {
+                state.status = null;
+                state.error = action.payload
             })
     }
 })

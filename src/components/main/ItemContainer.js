@@ -21,17 +21,17 @@ const ItemContainer = () => {
 
     const data = useSelector(state => state.allDataSlice);
     const countRows = useSelector(state => state.rows.size)
-    const count = data.data.length;
     const pageSize = 5;
-    const itemsCount = Math.ceil(count / pageSize);
+    const itemsCount = Math.ceil(countRows / pageSize);
 
-    const handlePageChange = (pageIndex) => {
-        console.log('page ', pageIndex)
+    const handlePageChange = (count) => {
+        console.log('page ', count)
     }
 
     const funcRedirect = (id) => {
         navigate(`/itempage/${id}`)
     }
+
 
     return (
         <div>
@@ -44,7 +44,6 @@ const ItemContainer = () => {
             <Pagination
                 itemsCount={itemsCount}
                 onPageChange={handlePageChange}
-                countRows={countRows}
             />
         </div>
     );

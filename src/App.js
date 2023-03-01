@@ -19,6 +19,7 @@ function App() {
         <Routes>
           <Route exact path="/auth" element={<Auth />} />
           <Route exact path="/" element={<ItemContainer />} />
+          <Route exact path="/page/:count" element={<ItemContainer />} />
           <Route exact path="/itempage/:id" element={<ItemPageContainer />} />
           <Route exact path="/Registration" element={<Registration />} />
           <Route exact path="/searchpage/:search" element={<SearchContainer />} />
