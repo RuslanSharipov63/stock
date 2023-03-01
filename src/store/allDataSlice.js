@@ -57,7 +57,7 @@ export const fetchAuthorid = createAsyncThunk(
     state.error = action.payload;
 } */
 
-const fetchPageData = createAsyncThunk(
+export const fetchPageData = createAsyncThunk(
     '@page/fetchPageData',
     async function (count, { rejectWithValue }) {
         try {
@@ -133,7 +133,7 @@ const allDataSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchPageData.fulfilled, (state, action) => {
-                state.author = action.payload;
+                state.data = action.payload;
                 state.status = null;
                 state.error = null
             })

@@ -5,6 +5,7 @@ import Item from './Item';
 import Pagination from "../pagination/Pagination";
 import { fetchAllData } from './../../store/allDataSlice';
 import { fetchRows } from "../../store/rowsSlice";
+import { fetchPageData } from "./../../store/allDataSlice";
 
 const ItemContainer = () => {
     let navigate = useNavigate();
@@ -12,12 +13,12 @@ const ItemContainer = () => {
 
     useEffect(() => {
         dispatch(fetchAllData())
-
-    }, [dispatch])
-
-    useEffect(() => {
         dispatch(fetchRows('all'))
     }, [dispatch])
+
+    /* useEffect(() => {
+
+    }, [dispatch]) */
 
     const data = useSelector(state => state.allDataSlice);
     const countRows = useSelector(state => state.rows.size)
@@ -25,7 +26,7 @@ const ItemContainer = () => {
     const itemsCount = Math.ceil(countRows / pageSize);
 
     const handlePageChange = (count) => {
-        console.log('page ', count)
+        dispatch(fetchPageData(count))
     }
 
     const funcRedirect = (id) => {
