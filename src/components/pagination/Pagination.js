@@ -6,25 +6,47 @@ const Pagination = (props) => {
     useEffect(() => {
     }, [props])
 
+    const { left, right } = props.styleOffset;
+    const leftStyle = right != '' ? right + "px" : null;
+    const rightStyle = left != '' ? left + "px" : null;
+
+    console.log(leftStyle + 'право')
+    console.log(rightStyle + 'лево')
 
     let arrayPage = []
 
     for (let i = 1; i <= props.itemsCount; i++) {
         arrayPage.push(
-            <li className={style.page}
+            <p className={style.page}
                 key={`page${i}`}
                 onClick={() => props.onPageChange(i)}>
                 {i}
-            </li>)
+            </p>)
     }
 
     return (
-        <>
-            <ul className={style.pagination}>
-                {arrayPage}
-            </ul>
+        <div className={style.container}>
+            <div
+                className={style.left}
+                onClick={props.onStyleChangeLeft}
 
-        </>
+            >&laquo;</div>
+            <div className={style.wrapper}>
+                <div className={style.pagination}
+                    style={{
+                        left: leftStyle,
+                        right: rightStyle
+                    }}
+                >
+                    {arrayPage}
+                </div>
+            </div>
+            <div
+                className={style.right}
+                onClick={props.onStyleChangeRight}
+            /* style={{ left: props.styleOffsetRight.left }} */
+            >&raquo;</div>
+        </div >
     );
 }
 
