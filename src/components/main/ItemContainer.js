@@ -6,6 +6,12 @@ import Pagination from "../pagination/Pagination";
 import { fetchAllData } from './../../store/allDataSlice';
 import { fetchRows } from "../../store/rowsSlice";
 import { fetchPageData } from "./../../store/allDataSlice";
+import { isNull } from "lodash";
+
+
+
+let leftOffset = 0
+let rightOffset = 0
 
 const ItemContainer = () => {
     let navigate = useNavigate();
@@ -30,19 +36,28 @@ const ItemContainer = () => {
         dispatch(fetchPageData(count))
     }
 
-    const onStyleChangeLeft = () => {
-        setStyleOffset({
-            ...styleOffset,
-            left: '',
-            right: '210'
-        })
 
-    }
-    const onStyleChangeRight = () => {
+    const onStyleChangeLeft = () => {
+
+        rightOffset += 210;
+
+        leftOffset -= 210;
+
         setStyleOffset({
             ...styleOffset,
-            left: '210',
-            right: ''
+            left: String(leftOffset),
+            right: String(rightOffset)
+        })
+    }
+
+    const onStyleChangeRight = () => {
+
+        leftOffset += 210;
+        rightOffset -= 210;
+        setStyleOffset({
+            ...styleOffset,
+            left: String(leftOffset),
+            right: String(rightOffset)
         })
 
     }

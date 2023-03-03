@@ -10,8 +10,8 @@ const Pagination = (props) => {
     const leftStyle = right != '' ? right + "px" : null;
     const rightStyle = left != '' ? left + "px" : null;
 
-    console.log(leftStyle + 'право')
-    console.log(rightStyle + 'лево')
+    console.log(left)
+    console.log(right)
 
     let arrayPage = []
 
@@ -44,7 +44,6 @@ const Pagination = (props) => {
             <div
                 className={style.right}
                 onClick={props.onStyleChangeRight}
-            /* style={{ left: props.styleOffsetRight.left }} */
             >&raquo;</div>
         </div >
     );
