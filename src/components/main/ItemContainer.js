@@ -31,16 +31,32 @@ const ItemContainer = () => {
     const countRows = useSelector(state => state.rows.size)
     const pageSize = 5;
     const itemsCount = Math.ceil(countRows / pageSize);
+    /* максимальная длина в пикселях блока со страницами */
+    let chunkItemsCount = itemsCount / 25 * 210;
 
     const handlePageChange = (count) => {
         dispatch(fetchPageData(count))
     }
 
-
     const onStyleChangeLeft = () => {
 
-        rightOffset += 210;
 
+        /* преобразовываем строку в число нашего стейта, который потом кладется как пиксели  */
+        let numberChunkItemsCount = +styleOffset.left
+
+        if (numberChunkItemsCount > chunkItemsCount) {
+            return;
+        }
+
+        console.log(typeof numberChunkItemsCount + ' ' + numberChunkItemsCount)
+        if (styleOffset.left === '' && styleOffset.right === '') {
+            return;
+        }
+        if (styleOffset.left === '0' && styleOffset.right === '0') {
+            return;
+        }
+
+        rightOffset += 210;
         leftOffset -= 210;
 
         setStyleOffset({
@@ -51,9 +67,16 @@ const ItemContainer = () => {
     }
 
     const onStyleChangeRight = () => {
+        /* преобразовываем строку в число нашего стейта, который потом кладется как пиксели  */
+        let numberChunkItemsCount = +styleOffset.right;
 
         leftOffset += 210;
         rightOffset -= 210;
+
+        if (-numberChunkItemsCount > -chunkItemsCount) {
+            return;
+        }
+
         setStyleOffset({
             ...styleOffset,
             left: String(leftOffset),
