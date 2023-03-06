@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+ 
+.footer {
+    border: 1px solid red;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+
+}
+
+.title {
+    height: 10px;
+}

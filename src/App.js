@@ -8,6 +8,7 @@ import Account from './components/account/Account';
 import SearchContainer from './components/search/searchContainer';
 import ImagesContainer from './components/images/ImagesContainer';
 import VideosContainer from './components/videos/VideosContainer';
+import Footer from './components/footer/Footer';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/images" element={<ImagesContainer />} />
           <Route exact path="/videos" element={<VideosContainer />} />
         </Routes>
+        <Footer />
       </Router>
     </div>
 
