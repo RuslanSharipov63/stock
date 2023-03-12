@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchImgForId, fetchAuthorid } from "../store/allDataSlice";
 import { fetchImgAuthorId } from "../store/userImgSlice";
-import { } from "../store/allDataSlice";
+/* import { } from "../store/allDataSlice"; */
 import ItemPage from "./ItemPage";
 
 

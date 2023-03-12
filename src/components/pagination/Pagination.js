@@ -10,9 +10,6 @@ const Pagination = (props) => {
     const leftStyle = right != '' ? right + "px" : null;
     const rightStyle = left != '' ? left + "px" : null;
 
-    console.log(left)
-    console.log(right)
-
     let arrayPage = []
 
     for (let i = 1; i <= props.itemsCount; i++) {
