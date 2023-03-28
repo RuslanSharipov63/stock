@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDataVideos } from "../../store/videosPageSlice";
 import Item from "../main/Item";
+import PaginationContainer from "../pagination/PaginationContainer";
 
 const VideosContainer = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const VideosContainer = () => {
             {data.status != null && data.status}
             {data.error != null && data.error}
             {dataMessage.message === 'true' ? 'Ошибка соединения с базой данных' : <Item imgList={data} funcRedirect={funcRedirect} />}
+            <PaginationContainer text={'video'}/>
         </>
     );
 }

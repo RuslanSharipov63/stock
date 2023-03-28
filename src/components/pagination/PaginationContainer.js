@@ -16,7 +16,9 @@ const PaginationContainer = (props) => {
     useEffect(() => {
         dispatch(fetchRows(props.text))
     }, [dispatch])
+    
     const countRows = useSelector(state => state.rows.size)
+
     const pageSize = 5;
     const itemsCount = Math.ceil(countRows / pageSize);
     /* максимальная длина в пикселях блока со страницами */

@@ -9,6 +9,7 @@ import SearchContainer from './components/search/searchContainer';
 import ImagesContainer from './components/images/ImagesContainer';
 import VideosContainer from './components/videos/VideosContainer';
 
+
 function App() {
 
   return (
@@ -18,12 +19,13 @@ function App() {
         <Routes>
           <Route exact path="/" element={<ItemContainer />} />
           <Route exact path="/auth" element={<Auth />} />
-           <Route exact path="/itempage/:id" element={<ItemPageContainer />} /> 
+          <Route exact path="/itempage/:id" element={<ItemPageContainer />} />
           <Route exact path="/Registration" element={<Registration />} />
           <Route exact path="/searchpage/:search" element={<SearchContainer />} />
           <Route exact path="/account/:id" element={<Account />} />
           <Route exact path="/images" element={<ImagesContainer />} />
           <Route exact path="/videos" element={<VideosContainer />} />
+       
         </Routes>
       </Router>
     </div>
